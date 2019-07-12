@@ -1,16 +1,12 @@
-# patrimonio_if
-
-Verificação do patrimonio do IF
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Patrimônio IF
+[![Languages](https://img.shields.io/github/languages/count/shinoda-labs/PatrimonioIF.svg)]()
+[![Size](https://img.shields.io/github/repo-size/shinoda-labs/PatrimonioIF.svg)]()
+[![Pull Requests](https://img.shields.io/github/issues-pr-closed/shinoda-labs/PatrimonioIF.svg)]()
+[![Issues](https://img.shields.io/github/issues/shinoda-labs/PatrimonioIF.svg)]()
+[![Open Issues](https://img.shields.io/github/issues-raw/shinoda-labs/PatrimonioIF.svg)]()
+[![Closed Issues](https://img.shields.io/github/issues-closed/shinoda-labs/PatrimonioIF.svg)]()
+[![Issues Closed](https://img.shields.io/github/issues-closed-raw/shinoda-labs/PatrimonioIF.svg)]()
+[![License](https://img.shields.io/github/license/shinoda-labs/PatrimonioIF.svg)]()
+[![Commit Month](https://img.shields.io/github/commit-activity/m/shinoda-labs/PatrimonioIF.svg)]()
+[![Contributors](https://img.shields.io/github/contributors/shinoda-labs/PatrimonioIF.svg)]()
+[![Last Commit](https://img.shields.io/github/last-commit/shinoda-labs/PatrimonioIF/master.svg)]()
