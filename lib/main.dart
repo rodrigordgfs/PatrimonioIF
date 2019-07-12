@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patrimonio_if/screens/patrimony_list_screen.dart';
 
+
 void main() => runApp(PatrimonioIF());
 
 class PatrimonioIF extends StatefulWidget {
