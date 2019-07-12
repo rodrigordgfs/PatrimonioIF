@@ -9,7 +9,6 @@ class PatrimonyListScreen extends StatefulWidget {
 }
 
 class _PatrimonyListScreenState extends State<PatrimonyListScreen> {
-
   String barcode = "";
 
   Future _scanBarCode() async {
@@ -17,6 +16,7 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen> {
       String barcodeResult = await BarcodeScanner.scan();
       setState(() {
         barcode = barcodeResult;
+        Navigator.of(context).pushNamed('/CheckPatrimony');
       });
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
@@ -44,6 +44,7 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Patrimônio IF'),
+        centerTitle: true,
         backgroundColor: Colors.green,
         actions: <Widget>[],
       ),
