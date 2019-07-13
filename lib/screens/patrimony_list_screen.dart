@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
+import 'package:patrimonio_if/arguments/PatrimonyIDArguments.dart';
+import 'package:patrimonio_if/screens/check_patrimony_screen.dart';
 
 class PatrimonyListScreen extends StatefulWidget {
   @override
@@ -16,7 +18,12 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen> {
       String barcodeResult = await BarcodeScanner.scan();
       setState(() {
         barcode = barcodeResult;
-        Navigator.of(context).pushNamed('/CheckPatrimony');
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CheckPatrimonyScreen(),
+                settings: RouteSettings(
+                    arguments: PatrimonyIDArguments(barcodeResult))));
       });
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
@@ -65,7 +72,7 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Container(
         child: Center(
-          child: Text("$barcode"),
+          child: Text("Em Breve"),
         ),
       ),
     );
