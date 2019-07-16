@@ -10,17 +10,22 @@ class PatrimonioIF extends StatefulWidget {
 }
 
 class _PatrimonioIFState extends State<PatrimonioIF> {
+
+  static const appTitle = 'Patrimônio IF';
+  static const patrimonyList = '/PatrimonyList';
+  static const checkPatrimony = '/CheckPatrimony';
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Patrimônio IF',
+      title: appTitle,
       theme: ThemeData(
           primaryColor: Colors.green, primarySwatch: Colors.lightGreen),
       debugShowCheckedModeBanner: false,
       home: PatrimonyListScreen(),
       routes: <String, WidgetBuilder>{
-        '/PatrimonyList': (BuildContext context) => new PatrimonyListScreen(),
-        '/CheckPatrimony': (BuildContext context) => new CheckPatrimonyScreen()
+        patrimonyList: (BuildContext context) => new PatrimonyListScreen(),
+        checkPatrimony: (BuildContext context) => new CheckPatrimonyScreen()
       },
     );
   }

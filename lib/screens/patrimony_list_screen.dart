@@ -11,6 +11,63 @@ class PatrimonyListScreen extends StatefulWidget {
 }
 
 class _PatrimonyListScreenState extends State<PatrimonyListScreen> {
+  static const appTitle = 'Patrimônio IF';
+  static const readPatrimony = 'Ler Patrimônio';
+
+  final barcodeArray = [
+    '789860145001',
+    '789860145002',
+    '789860145003',
+    '789860145004',
+    '789860145005',
+    '789860145006',
+    '789860145007',
+    '789860145008',
+    '789860145009',
+    '7898601450010',
+    '7898601450011',
+    '7898601450012',
+    '7898601450013',
+    '7898601450014',
+    '7898601450015'
+  ];
+
+  final localArray = [
+    'Biblioteca',
+    'Sala 741',
+    'Sala 884',
+    'Laboratório 1',
+    'Laboratorio 2',
+    'Auditório',
+    'Biblioteca',
+    'Diretoria',
+    'Mini Auditório',
+    'Sala 101',
+    'Biblioteca',
+    'Sala 741',
+    'Sala 884',
+    'Laboratório 1',
+    'Laboratorio 2'
+  ];
+
+  final nomeArray = [
+    'Livro PHP',
+    'Cadeira',
+    'Classe',
+    'Computador',
+    'Estabilizador',
+    'Projetor',
+    'Macintosh',
+    'Escrivaninha',
+    'Mesa',
+    'Quadro Branco',
+    'Livro PHP',
+    'Cadeira',
+    'Classe',
+    'Computador',
+    'Estabilizador'
+  ];
+
   String barcode = "";
 
   Future _scanBarCode() async {
@@ -50,14 +107,14 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Patrimônio IF'),
+        title: Text(appTitle),
         centerTitle: true,
         backgroundColor: Colors.green,
         actions: <Widget>[],
       ),
       floatingActionButton: FloatingActionButton.extended(
         label: Text(
-          'Ler Patrimônio',
+          readPatrimony,
           style: TextStyle(color: Colors.white),
         ),
         icon: Icon(
@@ -72,7 +129,20 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Container(
         child: Center(
-          child: Text("Em Breve"),
+          child: ListView.builder(
+            itemCount: barcodeArray.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                  onTap: () {},
+                  title: Text(barcodeArray[index]),
+                  trailing: Text(localArray[index]),
+                  subtitle: Text(nomeArray[index]),
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.green,
+                    child: Icon(Icons.done),
+                  ));
+            },
+          ),
         ),
       ),
     );
