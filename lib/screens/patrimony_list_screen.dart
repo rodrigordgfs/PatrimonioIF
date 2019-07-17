@@ -4,15 +4,20 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'package:patrimonio_if/arguments/PatrimonyIDArguments.dart';
 import 'package:patrimonio_if/screens/check_patrimony_screen.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class PatrimonyListScreen extends StatefulWidget {
   @override
   _PatrimonyListScreenState createState() => _PatrimonyListScreenState();
 }
 
-class _PatrimonyListScreenState extends State<PatrimonyListScreen> {
+class _PatrimonyListScreenState extends State<PatrimonyListScreen>
+    with SingleTickerProviderStateMixin {
   static const appTitle = 'Patrimônio IF';
   static const readPatrimony = 'Ler Patrimônio';
+  static const verified = 'Verificado';
+  static const notVerified = 'Não Verificado';
 
   final barcodeArray = [
     '789860145001',
@@ -68,13 +73,12 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen> {
     'Estabilizador'
   ];
 
-  String barcode = "";
+  TabController _tabController;
 
   Future _scanBarCode() async {
     try {
       String barcodeResult = await BarcodeScanner.scan();
       setState(() {
-        barcode = barcodeResult;
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -85,28 +89,63 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen> {
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
         setState(() {
-          barcode = "Permissão da câmera negada";
+          toast('Permissão da câmera negada', Colors.red);
         });
       } else {
         setState(() {
-          barcode = "Erro $e";
+          toast("Erro $e", Colors.red);
         });
       }
     } on FormatException {
       setState(() {
-        barcode = "Leitura Cancelada";
+        toast('Leitura Cancelada', Colors.blue);
       });
     } catch (e) {
       setState(() {
-        barcode = "Erro $e";
+        toast('Erro $e', Colors.red);
       });
     }
+  }
+
+  @override
+  void initState() {
+    _tabController = new TabController(length: 2, vsync: this);
+    super.initState();
+  }
+
+  void toast(String msg, Color color) {
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIos: 1,
+        backgroundColor: color,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        bottom: TabBar(
+          unselectedLabelColor: Colors.white,
+          labelColor: Colors.yellow,
+          controller: _tabController,
+          indicatorSize: TabBarIndicatorSize.tab,
+          indicatorColor: Colors.yellow,
+          tabs: <Widget>[
+            new Tab(
+              text: verified,
+              //icon: Icon(Icons.done, color: Colors.white),
+            ),
+            new Tab(
+              text: notVerified,
+              //icon: Icon(Icons.close, color: Colors.white),
+            )
+          ],
+        ),
+        bottomOpacity: 1,
         title: Text(appTitle),
         centerTitle: true,
         backgroundColor: Colors.green,
@@ -126,24 +165,73 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen> {
           _scanBarCode();
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: Container(
-        child: Center(
-          child: ListView.builder(
-            itemCount: barcodeArray.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                  onTap: () {},
-                  title: Text(barcodeArray[index]),
-                  trailing: Text(localArray[index]),
-                  subtitle: Text(nomeArray[index]),
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.green,
-                    child: Icon(Icons.done),
-                  ));
-            },
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      body: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: _tabController,
+        children: <Widget>[
+          Container(
+            child: Center(
+              child: ListView.builder(
+                itemCount: barcodeArray.length,
+                itemBuilder: (context, index) {
+                  return Slidable(
+                    actionPane: SlidableDrawerActionPane(),
+                    actionExtentRatio: 0.25,
+                    actions: <Widget>[
+                      IconSlideAction(
+                          caption: 'Editar',
+                          color: Colors.blueAccent,
+                          icon: Icons.edit,
+                          onTap: () {
+                            toast("Em breve!", Colors.blueAccent);
+                          })
+                    ],
+                    secondaryActions: <Widget>[
+                      IconSlideAction(
+                        caption: 'Deletar',
+                        color: Colors.redAccent,
+                        icon: Icons.delete,
+                        onTap: () {
+                          toast("Em breve!", Colors.redAccent);
+                        },
+                      )
+                    ],
+                    child: ListTile(
+                        onTap: () {},
+                        title: Text(barcodeArray[index]),
+                        trailing: Text(
+                          localArray[index],
+                        ),
+                        subtitle: Text(nomeArray[index]),
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.green,
+                          child: Icon(Icons.done),
+                        )),
+                  );
+                },
+              ),
+            ),
           ),
-        ),
+          Container(
+            child: Center(
+              child: ListView.builder(
+                itemCount: barcodeArray.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                      onTap: () {},
+                      title: Text(barcodeArray[index]),
+                      trailing: Text(localArray[index]),
+                      subtitle: Text(nomeArray[index]),
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.red,
+                        child: Icon(Icons.close),
+                      ));
+                },
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

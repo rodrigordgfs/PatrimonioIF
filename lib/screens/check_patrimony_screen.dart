@@ -8,6 +8,7 @@ class CheckPatrimonyScreen extends StatefulWidget {
 
 class _CheckPatrimonyScreenState extends State<CheckPatrimonyScreen> {
   static const routName = '/CheckPatrimony';
+  static const objectName = 'Nome do Objeto';
 
   TextEditingController controlerName = TextEditingController();
 
@@ -22,30 +23,44 @@ class _CheckPatrimonyScreenState extends State<CheckPatrimonyScreen> {
         centerTitle: true,
         actions: <Widget>[],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text(
+          'Salvar',
+          style: TextStyle(color: Colors.white),
+        ),
+        icon: Icon(
           Icons.save,
           color: Colors.white,
         ),
         backgroundColor: Colors.green,
+        onPressed: () {},
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: Container(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
+              padding: EdgeInsets.fromLTRB(24.0, 16.0, 24.0, 8.0),
               child: TextField(
+                cursorColor: Colors.yellow,
                 controller: controlerName,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
-                    icon: Icon(
-                      Icons.local_activity,
-                      color: Colors.green,
-                    ),
-                    hintText: 'Nome do Objeto',
-                    border: OutlineInputBorder()),
+                    labelText: objectName,
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black38))),
                 onSubmitted: (value) {},
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(24.0, 0, 24, 8.0),
+              child: Container(
+                height: 50.0,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(7.0),
+                    border: Border.all(color: Colors.black38)),
+                child: Container(),
               ),
             )
           ],
