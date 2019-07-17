@@ -187,16 +187,16 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
                             toast("Em breve!", Colors.blueAccent);
                           })
                     ],
-                    secondaryActions: <Widget>[
-                      IconSlideAction(
-                        caption: 'Deletar',
-                        color: Colors.redAccent,
-                        icon: Icons.delete,
-                        onTap: () {
-                          toast("Em breve!", Colors.redAccent);
-                        },
-                      )
-                    ],
+                    //secondaryActions: <Widget>[
+                    //  IconSlideAction(
+                    //    caption: 'Deletar',
+                    //    color: Colors.redAccent,
+                    //    icon: Icons.delete,
+                    //    onTap: () {
+                    //      toast("Em breve!", Colors.redAccent);
+                    //    },
+                    //  )
+                    //],
                     child: ListTile(
                         onTap: () {},
                         title: Text(barcodeArray[index]),
@@ -206,7 +206,7 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
                         subtitle: Text(nomeArray[index]),
                         leading: CircleAvatar(
                           backgroundColor: Colors.green,
-                          child: Icon(Icons.done),
+                          child: Icon(Icons.done, color: Colors.white,),
                         )),
                   );
                 },
@@ -225,7 +225,7 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
                       subtitle: Text(nomeArray[index]),
                       leading: CircleAvatar(
                         backgroundColor: Colors.red,
-                        child: Icon(Icons.close),
+                        child: Icon(Icons.close, color: Colors.white),
                       ));
                 },
               ),
