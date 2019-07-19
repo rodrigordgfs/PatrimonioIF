@@ -161,7 +161,12 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
           ],
         ),
         bottomOpacity: 1,
+<<<<<<< HEAD
         title: Text(args.id),
+=======
+        title: Text(appTitle,
+                        style: TextStyle(fontWeight: FontWeight.w300)),
+>>>>>>> feature/about-screen
         centerTitle: true,
         backgroundColor: Colors.green,
         actions: <Widget>[
@@ -178,7 +183,7 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
       floatingActionButton: FloatingActionButton.extended(
         label: Text(
           readPatrimony,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
         ),
         icon: Icon(
           Icons.camera,
@@ -220,11 +225,14 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
                     ],
                     child: ListTile(
                         onTap: () {},
-                        title: Text(barcodeArray[index]),
+                        title: Text(barcodeArray[index],
+                        style: TextStyle(fontWeight: FontWeight.w300)),
                         trailing: Text(
                           localArray[index],
+                        style: TextStyle(fontWeight: FontWeight.w300),
                         ),
-                        subtitle: Text(nomeArray[index]),
+                        subtitle: Text(nomeArray[index],
+                        style: TextStyle(fontWeight: FontWeight.w300)),
                         leading: CircleAvatar(
                           backgroundColor: Colors.green,
                           child: Icon(
@@ -244,9 +252,12 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
                 itemBuilder: (context, index) {
                   return ListTile(
                       onTap: () {},
-                      title: Text(barcodeArray[index]),
-                      trailing: Text(localArray[index]),
-                      subtitle: Text(nomeArray[index]),
+                      title: Text(barcodeArray[index],
+                        style: TextStyle(fontWeight: FontWeight.w300)),
+                      trailing: Text(localArray[index],
+                        style: TextStyle(fontWeight: FontWeight.w300)),
+                      subtitle: Text(nomeArray[index],
+                        style: TextStyle(fontWeight: FontWeight.w300)),
                       leading: CircleAvatar(
                         backgroundColor: Colors.red,
                         child: Icon(Icons.close, color: Colors.white),
