@@ -26,7 +26,7 @@ class _CheckPatrimonyScreenState extends State<CheckPatrimonyScreen> {
       floatingActionButton: FloatingActionButton.extended(
         label: Text(
           'Salvar',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
         ),
         icon: Icon(
           Icons.save,
