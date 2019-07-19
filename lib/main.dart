@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patrimonio_if/screens/check_patrimony_screen.dart';
 import 'package:patrimonio_if/screens/patrimony_list_screen.dart';
+import 'package:patrimonio_if/screens/place_screen.dart';
 
 void main() => runApp(PatrimonioIF());
 
@@ -22,7 +23,8 @@ class _PatrimonioIFState extends State<PatrimonioIF> {
       theme: ThemeData(
           primaryColor: Colors.green, primarySwatch: Colors.lightGreen),
       debugShowCheckedModeBanner: false,
-      home: PatrimonyListScreen(),
+      //home: PatrimonyListScreen(),
+      home: PlaceScreen(),
       routes: <String, WidgetBuilder>{
         patrimonyList: (BuildContext context) => new PatrimonyListScreen(),
         checkPatrimony: (BuildContext context) => new CheckPatrimonyScreen()

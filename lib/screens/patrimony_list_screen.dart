@@ -1,8 +1,10 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'package:patrimonio_if/arguments/PatrimonyIDArguments.dart';
+import 'package:patrimonio_if/arguments/PlaceIDArguments.dart';
 import 'package:patrimonio_if/screens/check_patrimony_screen.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -14,10 +16,13 @@ class PatrimonyListScreen extends StatefulWidget {
 
 class _PatrimonyListScreenState extends State<PatrimonyListScreen>
     with SingleTickerProviderStateMixin {
+  static const routName = '/PatrimonyList';
   static const appTitle = 'Patrimônio IF';
   static const readPatrimony = 'Ler Patrimônio';
   static const verified = 'Verificado';
   static const notVerified = 'Não Verificado';
+
+  String file_path = '';
 
   final barcodeArray = [
     '789860145001',
@@ -113,6 +118,14 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
     super.initState();
   }
 
+  void getFilePath() async {
+    file_path = await FilePicker.getFilePath(
+        type: FileType.CUSTOM, fileExtension: 'xls');
+    if (file_path != "") {
+      toast(file_path, Colors.blue);
+    }
+  }
+
   void toast(String msg, Color color) {
     Fluttertoast.showToast(
         msg: msg,
@@ -126,6 +139,8 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
 
   @override
   Widget build(BuildContext context) {
+    final PlaceIDArgumnents args = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(
         bottom: TabBar(
@@ -146,10 +161,19 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
           ],
         ),
         bottomOpacity: 1,
-        title: Text(appTitle),
+        title: Text(args.id),
         centerTitle: true,
         backgroundColor: Colors.green,
-        actions: <Widget>[],
+        actions: <Widget>[
+          IconButton(
+            padding: EdgeInsets.only(right: 8.0),
+            icon: Icon(Icons.file_upload, color: Colors.white),
+            tooltip: 'Arquivo',
+            onPressed: () {
+              getFilePath();
+            },
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         label: Text(
@@ -184,19 +208,16 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
                           color: Colors.blueAccent,
                           icon: Icons.edit,
                           onTap: () {
-                            toast("Em breve!", Colors.blueAccent);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        CheckPatrimonyScreen(),
+                                    settings: RouteSettings(
+                                        arguments: PatrimonyIDArguments(
+                                            barcodeArray[index]))));
                           })
                     ],
-                    //secondaryActions: <Widget>[
-                    //  IconSlideAction(
-                    //    caption: 'Deletar',
-                    //    color: Colors.redAccent,
-                    //    icon: Icons.delete,
-                    //    onTap: () {
-                    //      toast("Em breve!", Colors.redAccent);
-                    //    },
-                    //  )
-                    //],
                     child: ListTile(
                         onTap: () {},
                         title: Text(barcodeArray[index]),
@@ -206,7 +227,10 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
                         subtitle: Text(nomeArray[index]),
                         leading: CircleAvatar(
                           backgroundColor: Colors.green,
-                          child: Icon(Icons.done, color: Colors.white,),
+                          child: Icon(
+                            Icons.done,
+                            color: Colors.white,
+                          ),
                         )),
                   );
                 },
