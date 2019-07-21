@@ -161,12 +161,8 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
           ],
         ),
         bottomOpacity: 1,
-<<<<<<< HEAD
-        title: Text(args.id),
-=======
-        title: Text(appTitle,
+        title: Text(args.id,
                         style: TextStyle(fontWeight: FontWeight.w300)),
->>>>>>> feature/about-screen
         centerTitle: true,
         backgroundColor: Colors.green,
         actions: <Widget>[
