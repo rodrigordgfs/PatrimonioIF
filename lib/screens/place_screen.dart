@@ -30,7 +30,8 @@ class _PlaceScreenState extends State<PlaceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Locais'),
+        title: Text('Locais',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300)),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
@@ -38,15 +39,18 @@ class _PlaceScreenState extends State<PlaceScreen> {
         itemCount: localArray.length,
         itemBuilder: (context, index) {
           return ListTile(
-            onTap: (){
+            onTap: () {
               Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => PatrimonyListScreen(),
-                settings: RouteSettings(
-                    arguments: PlaceIDArgumnents(localArray[index]))));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PatrimonyListScreen(),
+                      settings: RouteSettings(
+                          arguments: PlaceIDArgumnents(localArray[index]))));
             },
-            title: Text(localArray[index]),
+            title: Text(
+              localArray[index],
+              style: TextStyle(fontWeight: FontWeight.w300),
+            ),
             leading: CircleAvatar(
               backgroundColor: Colors.green,
               child: Icon(Icons.place, color: Colors.white),

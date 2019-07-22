@@ -34,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.build, color: Colors.white),
+            icon: Icon(Icons.error, color: Colors.white),
             onPressed: () {
               Navigator.pushNamed(context, '/AboutScreen');
             },

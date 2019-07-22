@@ -18,7 +18,8 @@ class _CheckPatrimonyScreenState extends State<CheckPatrimonyScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(args.id),
+        title: Text(args.id,
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300)),
         backgroundColor: Colors.green,
         centerTitle: true,
         actions: <Widget>[],

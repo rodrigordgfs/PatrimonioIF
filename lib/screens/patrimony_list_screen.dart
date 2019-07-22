@@ -22,8 +22,6 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
   static const verified = 'Verificado';
   static const notVerified = 'Não Verificado';
 
-  String file_path = '';
-
   final barcodeArray = [
     '789860145001',
     '789860145002',
@@ -118,13 +116,6 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
     super.initState();
   }
 
-  void getFilePath() async {
-    file_path = await FilePicker.getFilePath(
-        type: FileType.CUSTOM, fileExtension: 'xls');
-    if (file_path != "") {
-      toast(file_path, Colors.blue);
-    }
-  }
 
   void toast(String msg, Color color) {
     Fluttertoast.showToast(
@@ -152,11 +143,9 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
           tabs: <Widget>[
             new Tab(
               text: verified,
-              //icon: Icon(Icons.done, color: Colors.white),
             ),
             new Tab(
               text: notVerified,
-              //icon: Icon(Icons.close, color: Colors.white),
             )
           ],
         ),
@@ -165,16 +154,6 @@ class _PatrimonyListScreenState extends State<PatrimonyListScreen>
                         style: TextStyle(fontWeight: FontWeight.w300)),
         centerTitle: true,
         backgroundColor: Colors.green,
-        actions: <Widget>[
-          IconButton(
-            padding: EdgeInsets.only(right: 8.0),
-            icon: Icon(Icons.file_upload, color: Colors.white),
-            tooltip: 'Arquivo',
-            onPressed: () {
-              getFilePath();
-            },
-          )
-        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         label: Text(
