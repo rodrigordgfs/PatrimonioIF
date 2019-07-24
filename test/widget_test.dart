@@ -8,7 +8,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:patrimonio_if/main.dart';
 import 'package:patrimonio_if/screens/patrimony_list_screen.dart';
 
 void main() {

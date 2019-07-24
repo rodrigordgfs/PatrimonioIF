@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:patrimonio_if/arguments/PlaceIDArguments.dart';
-import 'package:patrimonio_if/screens/patrimony_list_screen.dart';
 
 class ImportDataScreen extends StatefulWidget {
   @override

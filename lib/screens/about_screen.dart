@@ -1,6 +1,9 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:io';
+import 'dart:async';
+import 'dart:convert';
 
 class AboutScreen extends StatefulWidget {
   @override
@@ -41,12 +44,12 @@ class _AboutScreenState extends State<AboutScreen> {
             actions: <Widget>[
               FlatButton(
                 child: Text("Continuar",
-                    style: TextStyle(fontWeight: FontWeight.w300)),
+                    style: TextStyle(fontWeight: FontWeight.w400)),
                 onPressed: function,
               ),
               FlatButton(
                 child: Text("Cancelar",
-                    style: TextStyle(fontWeight: FontWeight.w300)),
+                    style: TextStyle(fontWeight: FontWeight.w400)),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -54,6 +57,43 @@ class _AboutScreenState extends State<AboutScreen> {
             ],
           );
         });
+  }
+
+  void _getCSVData(String path) {
+    var count = 0;
+    final File file = new File(path);
+
+    Stream<List> inputStream = file.openRead();
+
+    inputStream.transform(utf8.decoder).transform(new LineSplitter()).listen(
+        (String line) {
+      if (count != 0) {
+        List row = line.split(';');
+        String id = row[0];
+        String numero = row[1];
+        String status = row[2];
+        String ed = row[3];
+        String descricao = row[4];
+        String rotulos = row[5];
+        String carga_atual = row[6];
+        String setor_do_responsavel = row[7];
+        String campus_da_carga = row[8];
+        String valor_aquisicao = row[9];
+        String valor_depreciado = row[10];
+        String numero_nota_fiscal = row[11];
+        String numero_de_Serie = row[12];
+        String data_entrada = row[13];
+        String data_carga = row[14];
+        String fornecedor = row[15];
+        String sala = row[16];
+        String estado_conservacao = row[17];
+      }
+      count++;
+    }, onDone: () {
+      toast("Dados Carregados com Sucesso\nQuantidade: ${count}", Colors.green);
+    }, onError: (e) {
+      toast(e.toString(), Colors.red);
+    });
   }
 
   @override
@@ -137,7 +177,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         filePath = await FilePicker.getFilePath(
                             type: FileType.CUSTOM, fileExtension: 'csv');
                         if (filePath != "") {
-                          toast(filePath, Colors.blue);
+                          _getCSVData(filePath);
                         }
                       });
                     })
