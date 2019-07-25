@@ -21,6 +21,8 @@ Widget aboutTile(String title, String subtitle, IconData icon, Function event) {
 
 class _AboutScreenState extends State<AboutScreen> {
   var filePath = '';
+  var _qtd_itens = 0;
+  var _data_importacao = '';
 
   void toast(String msg, Color color) {
     Fluttertoast.showToast(
@@ -164,9 +166,9 @@ class _AboutScreenState extends State<AboutScreen> {
                     ),
                     aboutTile(
                         "Arquivo", "patrimonio.csv", Icons.description, () {}),
-                    aboutTile("Quantidade de Itens", "1524",
+                    aboutTile("Quantidade de Itens", _qtd_itens.toString(),
                         Icons.filter_9_plus, () {}),
-                    aboutTile("Data de Improtação", "22/07/2019",
+                    aboutTile("Data de Improtação", _data_importacao != '' ? _data_importacao: null,
                         Icons.calendar_today, () {}),
                     aboutTile("Importar Dados", "Clique aqui para importar",
                         Icons.file_upload, () {
