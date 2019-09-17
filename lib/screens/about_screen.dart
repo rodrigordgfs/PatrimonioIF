@@ -166,9 +166,9 @@ class _AboutScreenState extends State<AboutScreen> {
                     ),
                     aboutTile(
                         "Arquivo", "patrimonio.csv", Icons.description, () {}),
-                    aboutTile("Quantidade de Itens", _qtd_itens.toString(),
+                    aboutTile("Quantidade de Itens", '0',
                         Icons.filter_9_plus, () {}),
-                    aboutTile("Data de Improtação", _data_importacao != '' ? _data_importacao: null,
+                    aboutTile("Data de Improtação", '00/00/0000',
                         Icons.calendar_today, () {}),
                     aboutTile("Importar Dados", "Clique aqui para importar",
                         Icons.file_upload, () {
